@@ -1,0 +1,30 @@
+name: 'SetUp Helm'
+author: EleSangwon
+description: 'Setup Helm, kubectl'
+inputs:
+  KUBECTL_VERSION: 
+    description: 'set kubectl version'
+    required: false
+    default: 'v1.23'
+  HELM_VERSION:
+    description: 'set helm version'
+    required: false
+    default: 'v3.7.1'
+  EKS_CLUSTER:
+    required: true
+    default: 'eks-cost-project-dev'
+  AWS_REGION:
+    required: false
+    default: 'ap-northeast-2'
+runs:
+  using: "composite"
+  steps:
+    - uses: azure/setup-kubectl@v3
+      with:
+        version: ${{ inputs.KUBECTL_VERSION }}
+    - uses: azure/setup-helm@v3
+      with:
+        version: ${{ inputs.HELM_VERSION }}
+    - name: update kube-config
+      run: |
+        aws eks update-kubeconfig --name ${{ inputs.EKS_CLUSTER }} --region ${{ inputs.AWS_REGION }}
