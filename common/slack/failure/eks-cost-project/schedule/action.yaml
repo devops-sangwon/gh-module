@@ -1,0 +1,47 @@
+name: 'Failure Slack Message'
+author: EleSangwon
+description: 'Slack message to send on failure'
+inputs:
+  MESSAGE: 
+    description: 'Message sent when a scheduling job fails'
+    required: true
+    default: 'eks cluster schedule job'
+  TYPE:
+    required: true
+    default: 'off'
+  EKS_CLUSTER:
+    required: true
+    default: 'eks-cost-project-dev'
+  SLACK_WEBHOOK:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Fail Message Using Slack webhook
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        payload: |
+          {
+            "attachments": [
+                {
+                    "fallback": "❌ Failure ${{ inputs.MESSAGE }}",
+                    "color": "#EB5353",
+                    "text": "❌ Failure ${{ inputs.MESSAGE }}",
+                    "fields": [
+                        {
+                            "title": "CLUSTER_NAME",
+                            "value": "${{ inputs.EKS_CLUSTER }}",
+                            "short": true
+                        },
+                        {
+                            "title": "TYPE",
+                            "value": "${{ inputs.TYPE }}",
+                            "short": true
+                        }
+                    ]
+                }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
