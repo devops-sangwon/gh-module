@@ -26,5 +26,6 @@ runs:
       with:
         version: ${{ inputs.HELM_VERSION }}
     - name: update kube-config
+      shell: bash
       run: |
         aws eks update-kubeconfig --name ${{ inputs.EKS_CLUSTER }} --region ${{ inputs.AWS_REGION }}
