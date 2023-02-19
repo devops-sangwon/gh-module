@@ -5,7 +5,7 @@ inputs:
   KUBECTL_VERSION: 
     description: 'set kubectl version'
     required: false
-    default: 'v1.20'
+    default: 'v1.20.0'
   HELM_VERSION:
     description: 'set helm version'
     required: false
