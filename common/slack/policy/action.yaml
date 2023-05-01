@@ -1,0 +1,63 @@
+name: 'Deny Policy Slack Message'
+author: EleSangwon
+description: 'Message that comes when the Policy fails'
+inputs:
+  MESSAGE: 
+    description: 'Message sent when Policy fails'
+    required: true
+    default: 'Chatbot '
+  EKS_CLUSTER:
+    required: true
+    default: 'eks-cost-project-dev'
+  TARGET_NAMESPACE:
+    required: true
+    default: 'sock-shop'
+  TARGET_APP:
+    required: true
+    default: 'sock-shop'
+  ACTION_URL:
+    required: true
+    default: 'sock-shop'
+  SLACK_WEBHOOK:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Fail Message when Policy failed
+      uses: slackapi/slack-github-action@v1.23.0
+      with:
+        payload: |
+          {
+            "attachments": [
+                {
+                    "fallback": "❌ ${{ inputs.MESSAGE }}",
+                    "color": "#EB5353",
+                    "text": "❌ ${{ inputs.MESSAGE }}",
+                    "fields": [
+                        {
+                            "title": "CLUSTER_NAME",
+                            "value": "${{ inputs.EKS_CLUSTER }}",
+                            "short": true
+                        },
+                        {
+                            "title": "TARGET_NAMESPACE",
+                            "value": "${{ inputs.TARGET_NAMESPACE }}",
+                            "short": true
+                        },
+                        {
+                            "title": "TARGET_HELM",
+                            "value": "${{ inputs.TARGET_APP }}",
+                            "short": true
+                        },
+                        {
+                            "title": "ACTION_URL",
+                            "value": "${{ inputs.ACTION_URL }}",
+                            "short": true
+                        }
+                    ]
+                }
+            ]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
