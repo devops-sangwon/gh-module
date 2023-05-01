@@ -14,6 +14,10 @@ inputs:
     description: ''
     required: true
     default: ''
+  SAVING_PERCENT:
+    description: ''
+    required: true
+    default: ''
   EKS_CLUSTER:
     required: true
     default: 'eks-cost-project-dev'
@@ -48,20 +52,20 @@ runs:
                             "short": true
                         },
                         {
+                            "title": "SAVING_PERCENT",
+                            "value": "${{ inputs.SAVING_PERCENT }} %",
+                            "short": true
+                        },
+                        {
                             "title": "TOTAL_BEFORE_COST",
-                            "value": "${{ inputs.TOTAL_BEFORE_COST }}",
+                            "value": "${{ inputs.TOTAL_BEFORE_COST }} USD",
                             "short": true
                         },
                         {
                             "title": "TOTAL_AFTER_COST",
-                            "value": "${{ inputs.TOTAL_AFTER_COST }}",
+                            "value": "${{ inputs.TOTAL_AFTER_COST }} USD",
                             "short": true
-                        },
-                        {
-                            "title": "ACTOR",
-                            "value": "${{ github.ACTOR }}",
-                            "short": true
-                        },
+                        }
                     ],
                     "actions": [
                         {
