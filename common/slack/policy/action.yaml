@@ -45,14 +45,21 @@ runs:
                             "short": true
                         },
                         {
-                            "title": "TARGET_HELM",
+                            "title": "TARGET_APP",
                             "value": "${{ inputs.TARGET_APP }}",
                             "short": true
                         },
                         {
-                            "title": "ACTION_URL",
-                            "value": "${{ inputs.ACTION_URL }}",
+                            "title": "ACTOR",
+                            "value": "${{ github.actor }}",
                             "short": true
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "type": "button",
+                            "text": "Visit workflow",
+                            "url" : "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                         }
                     ]
                 }

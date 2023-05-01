@@ -58,9 +58,16 @@ runs:
                             "short": true
                         },
                         {
-                            "title": "ACTION_URL",
-                            "value": "${{ inputs.ACTION_URL }}",
+                            "title": "ACTOR",
+                            "value": "${{ github.ACTOR }}",
                             "short": true
+                        },
+                    ],
+                    "actions": [
+                        {
+                            "type": "button",
+                            "text": "Visit workflow",
+                            "url" : "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
                         }
                     ]
                 }
