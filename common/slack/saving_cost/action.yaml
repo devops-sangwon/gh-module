@@ -14,6 +14,10 @@ inputs:
     description: ''
     required: true
     default: ''
+  PR_URL:
+    description: ''
+    required: true
+    default: ''
   SAVING_PERCENT:
     description: ''
     required: true
@@ -70,8 +74,8 @@ runs:
                     "actions": [
                         {
                             "type": "button",
-                            "text": "Visit workflow",
-                            "url" : "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                            "text": "Visit PR",
+                            "url" : "${{ inputs.PR_URL }}"
                         }
                     ]
                 }
