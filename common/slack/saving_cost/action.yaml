@@ -75,7 +75,7 @@ runs:
                         {
                             "type": "button",
                             "text": "Visit PR",
-                            "url" : ${{ inputs.PR_URL }}
+                            "url" : "${{ inputs.PR_URL }}"
                         }
                     ]
                 }
